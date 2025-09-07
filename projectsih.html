@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Legatix - Alumni Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-blue-100 via-indigo-80 to-purple-50 min-h-screen font-sans">
+
+  <!-- Navigation Bar -->
+<nav id="nav" class="glass max-w-5xl mx-auto my-6 px-6 py-4 hidden flex-wrap justify-between items-center z-30 sticky top-4 drop-shadow-xl rounded-2xl bg-gradient-to-r from-blue/500 via-blue/500 to-blue/500 backdrop-blur-lg border border-black/20">
+  <!-- Unique Brand Title -->
+  <h1 class="relative text-5xl font-extrabold text-transparent bg-clip-text 
+             bg-gradient-to-r from-blue-800 via-blue-600 to-blue-800
+             bg-[length:200%_200%] animate-gradient 
+             drop-shadow-[0_0_10px_rgba(238, 242, 255, 1)] select-none"
+      style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;">
+  LEGATIX
+</h1>
+
+  <!-- Nav Links -->
+  <ul id="nav-links" class="flex flex-wrap gap-2">
+    <li><button class="nav-link active px-4 py-2 rounded-xl font-semibold hover:bg-orange-100/50 transition" data-page="dashboard">Dashboard</button></li>
+    <li><button class="nav-link px-4 py-2 rounded-xl font-semibold hover:bg-orange-100/50 transition" data-page="profile">Profile</button></li>
+    <li><button class="nav-link px-4 py-2 rounded-xl font-semibold hover:bg-orange-100/50 transition" data-page="events">Events</button></li>
+    <li><button class="nav-link px-4 py-2 rounded-xl font-semibold hover:bg-orange-100/50 transition" data-page="jobs">Jobs</button></li>
+    <li><button class="nav-link px-4 py-2 rounded-xl font-semibold hover:bg-orange-100/50 transition" data-page="mentorship">Mentorship</button></li>
+    <li><button class="nav-link px-4 py-2 rounded-xl font-semibold hover:bg-orange-100/50 transition" data-page="admin">Admin</button></li>
+    <li><button class="nav-link px-4 py-2 rounded-xl font-semibold text-red-600 hover:text-red-700 hover:bg-red-100/50 transition" id="logoutBtn">Logout</button></li>
+  </ul>
+</nav>
+
+
+  <!-- Main content container -->
+  <main class="max-w-7xl mx-auto px-4 pb-12 min-h-[75vh]">
+    <!-- Pages -->
+    
+    <!-- Login Page -->
+    <section id="login" class="page fade-enter-active">
+      <div class="flex justify-center items-center min-h-[60vh]">
+        <div class="glass p-10 max-w-md w-full relative shadow-2xl">
+          <div class="flex justify-center mb-5 -mt-10">
+            <img src="logo.jpg" alt="LEGATIX Logo" 
+                 class="w-28 h-28 rounded-full border-4 border-black shadow-lg object-cover" />
+          </div>
+          <h2 class="text-3xl font-extrabold text-center mb-3 text-orange-500">Welcome to LEGATIX</h2>
+          <p class="text-center pb-8 mb-8 text-gray-700 select-none">Your Digital Platform for Centralized Alumni Data</p>
+          
+          <div id="login-form">
+            <form class="space-y-6" onsubmit="handleLogin(event)">
+             <input type="email" id="loginEmail" placeholder="Email" required autocomplete="email"
+              class="w-full p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600" />
+
+              <input type="password" id="loginPassword" placeholder="Password" required autocomplete="current-password"
+                  class="w-full p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600" />
+       <div class="flex justify-center">
+  <button type="submit" 
+          class="px-6 py-3 rounded-full border border-gray-300 bg-orange-400 hover:bg-orange-400 text-black">
+    Sign In
+  </button>
+</div>
+
+
+            </form>
+
+            <div class="flex items-center my-5">
+              <hr class="flex-grow border-gray-300" />
+              <span class="mx-3 text-gray-500">or</span>
+              <hr class="flex-grow border-gray-300" />
+            </div>
+
+            <div class="space-y-3">
+              <button aria-label="Login with Google" class="btn-white w-full flex justify-center items-center gap-3 p-3 rounded-full border border-gray-300 hover:bg-gray-100 transition" onclick="socialLogin('Google')">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3" fill="#4285F4" class="w-5 h-5"><path d="M533.5 278.4c0-17.4-1.5-34.1-4.3-50.4H272v95h146.7c-6.3 34-26.4 62.7-56.3 82v67h90.9c53.2-49 83.2-121.2 83.2-193.6z"/></svg>
+                Login with Google
+              </button>
+              <button aria-label="Login with LinkedIn" class="btn-white w-full flex justify-center items-center gap-3 p-3 rounded-full border border-gray-300 hover:bg-gray-100 transition" onclick="socialLogin('LinkedIn')">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="#0077B5" class="w-5 h-5"><path d="M100.28 448H7.4V148.9h92.88zM53.8 108.1c-30 0-54.4-24.4-54.4-54.4A54.4 54.4 0 0 1 53.8-.7a53.8 53.8 0 1 1 0 108zm394.97 339.9h-92.69V302.4c0-34.2-12.29-57.5-43-57.5-23.46 0-37.42 15.8-43.6 31.1-2.28 5.6-2.85 13.4-2.85 21.3v151.8h-92.69V148.9h92.69v40.8h1.32a92.4 92.4 0 0 1 83.36-45.9c60.77 0 106.44 39.6 106.44 124.7z"/></svg>
+                Login with LinkedIn
+              </button>
+            </div>
+
+            <p class="mt-7 text-center text-gray-600"onclick="toggleForm('login-form')">
+             Don't have an account?
+            <button class="px-6 py-2 ml-2 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"onclick="toggleForm()">
+             Sign Up
+             </button>
+            </p>
+
+
+          <div id="signup-form" class="hidden">
+            <form class="space-y-5" onsubmit="handleSignup(event)">
+              <input type="text" id="signupName" placeholder="Full Name" required autocomplete="name"
+                   class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"/>
+              <input type="email" id="signupEmail" placeholder="Email" required autocomplete="email"
+                   class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"/>
+              <input type="password" id="signupPassword" placeholder="Password" required autocomplete="new-password"
+                   class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"/>
+              <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required autocomplete="new-password"
+                   class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"/>
+              <button type="submit" class="btn-primary w-full">Create Account</button>
+            </form>
+
+            <p class="mt-6 text-center text-gray-600">
+              Already have an account?
+              <button class="text-blue-700 font-semibold hover:underline" onclick="toggleForm()">Login</button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard Page -->
+    <section id="dashboard" class="page hidden px-2 py-4">
+      <h1 class="text-4xl font-extrabold mb-6 text-blue-900">Welcome back, LAGATIX TEAM !</h1>
+      <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-8">
+        <img src="logo.jpg" alt="Alex Johnson headshot" class="w-20 h-20 rounded-full border-4 border-blue-400 shadow-lg object-cover" />
+        <p class="text-xl text-gray-700 select-text">"Our Legatix team is creative, collaborative, and highly skilled in developing innovative web solutions. We specialize in building efficient, user-friendly, and visually appealing platforms. Our focus is on delivering impactful digital experiences that empower communities and foster meaningful connections.</p>
+      </div>
+
+      <div class="responsive-grid mb-8">
+        <div class="glass card-shadow p-6 cursor-pointer hover:shadow-xl hover:scale-[1.03] transition" onclick="showPage('profile')">
+          <h3 class="text-2xl font-semibold mb-2 text-blue-700">Update Profile</h3>
+          <p class="text-gray-700">Keep your info current</p>
+        </div>
+        <div class="glass card-shadow p-6 cursor-pointer hover:shadow-xl hover:scale-[1.03] transition" onclick="showPage('events')">
+          <h3 class="text-2xl font-semibold mb-2 text-blue-700">Upcoming Events</h3>
+          <p class="text-gray-700">Reunions & webinars</p>
+        </div>
+        <div class="glass card-shadow p-6 cursor-pointer hover:shadow-xl hover:scale-[1.03] transition" onclick="showPage('jobs')">
+          <h3 class="text-2xl font-semibold mb-2 text-blue-700">Job Opportunities</h3>
+          <p class="text-gray-700">Post or apply today</p>
+        </div>
+        <div class="glass card-shadow p-6 cursor-pointer hover:shadow-xl hover:scale-[1.03] transition" onclick="showPage('mentorship')">
+          <h3 class="text-2xl font-semibold mb-2 text-blue-700">Mentorship Requests</h3>
+          <p class="text-gray-700">Connect with mentors</p>
+        </div>
+      </div>
+
+      <div class="glass card-shadow p-6">
+        <h3 class="text-2xl font-semibold mb-4 text-blue-700">Alumni Engagement Metrics</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 text-gray-700">
+          <div>
+            <p>Events Participated</p>
+            <div class="h-5 w-full rounded-full bg-blue-100 mt-1 overflow-hidden">
+              <div class="bg-blue-600 h-full animate-fill" style="width: 80%; transition: width 1.5s ease;"></div>
+            </div>
+          </div>
+          <div>
+            <p>Job Posts</p>
+            <div class="h-5 w-full rounded-full bg-blue-100 mt-1 overflow-hidden">
+              <div class="bg-blue-600 h-full animate-fill" style="width: 60%; transition: width 1.5s ease;"></div>
+            </div>
+          </div>
+          <div>
+            <p>Mentorship Sessions</p>
+            <div class="h-5 w-full rounded-full bg-blue-100 mt-1 overflow-hidden">
+              <div class="bg-blue-600 h-full animate-fill" style="width: 70%; transition: width 1.5s ease;"></div>
+            </div>
+          </div>
+          <div>
+            <p>Profile Updates</p>
+            <div class="h-5 w-full rounded-full bg-blue-100 mt-1 overflow-hidden">
+              <div class="bg-blue-600 h-full animate-fill" style="width: 90%; transition: width 1.5s ease;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Profile Page -->
+    <section id="profile" class="page hidden px-2 py-4">
+      <div class="flex flex-col sm:flex-row items-center gap-6 mb-6 p-4 glass rounded-lg shadow-md">
+        <img src="logo.jpg" alt="legatix Professional Portrait" class="w-24 h-24 rounded-full border-4 border-blue-400 shadow-md object-cover" />
+        <div>
+          <h1 class="text-4xl font-bold text-blue-800">LEGATIX TEAM</h1>
+          <button class="btn-primary mt-3" onclick="editProfile()">Best team for myself</button>
+        </div>
+      </div>
+      <div class="responsive-grid">
+        <div class="glass card-shadow p-6">
+          <h3 class="text-xl font-semibold mb-3 text-blue-700">Personal Info</h3>
+          <p><strong>Email:</strong> legatix11@example.com</p>
+          <p><strong>Phone:</strong> +1 234 567 890</p>
+          <p><strong>Location:</strong> india, jaipur</p>
+        </div>
+        <div class="glass card-shadow p-6">
+          <h3 class="text-xl font-semibold mb-3 text-blue-700">Education</h3>
+          <p>Btach in IT</p>
+          <p>GIT Jaipur, 2025 ,currently 1st year</p>
+        </div>
+        <div class="glass card-shadow p-6">
+          <h3 class="text-xl font-semibold mb-3 text-blue-700">Career Info</h3>
+          <p>Skilled developers and designers experienced in full-stack web development</p>
+          <p>LinkedIn: <a href="https://www.linkedin.com/in/days2go/"  rel="noopener" class="text-blue-600 underline">linkedin.com/in/lagatix</a></p>
+        </div>
+        <div class="glass card-shadow p-6">
+          <h3 class="text-xl font-semibold mb-3 text-blue-700">Achievements</h3>
+          <ul class="list-disc list-inside">
+            <li> Search on LinkedIn </li>
+            <li>Dovelpers</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events Page -->
+    <section id="events" class="page hidden px-2 py-4">
+      <h1 class="text-4xl font-extrabold mb-6 text-blue-900">Upcoming Events</h1>
+      <div class="space-y-6">
+        <article class="glass card-shadow p-6 rounded-lg">
+          <h3 class="text-2xl font-semibold mb-2 text-blue-700">Alumni Reunion 2023</h3>
+          <p><strong>Date:</strong> sept 5, 2025</p>
+          <p>Gather with fellow alumni for networking and interships.</p>
+          <button onclick="openModal('register', 'Alumni Reunion 2023')"
+          class="mt-4 px-6 py-2 rounded-xl font-semibold text-white 
+         bg-gradient-to-r from-indigo-500 via-blue-600 to-indigo-700 
+         shadow-lg hover:shadow-2xl hover:scale-105 
+         transition-all duration-300 ease-out 
+         focus:outline-none focus:ring-4 focus:ring-blue-300">
+  Register
+</button>
+
+        </article>
+
+        <article class="glass card-shadow p-6 rounded-lg">
+          <h3 class="text-2xl font-semibold mb-2 text-blue-700">Webinar: Career Growth</h3>
+          <p><strong>Date:</strong> November 5, 2023</p>
+          <p>Learn tips from industry leaders.</p>
+          <button onclick="openModal('register', 'Alumni Reunion 2023')"
+  class="mt-4 px-6 py-2 rounded-xl font-semibold text-white 
+         bg-gradient-to-r from-indigo-500 via-blue-600 to-indigo-700 
+         shadow-lg hover:shadow-2xl hover:scale-105 
+         transition-all duration-300 ease-out 
+         focus:outline-none focus:ring-4 focus:ring-blue-300">
+  Register
+</button>
+
+        </article>
+      </div>
+    </section>
+
+    <!-- Jobs Page -->
+    <section id="jobs" class="page hidden px-2 py-4">
+      <h1 class="text-4xl font-extrabold mb-6 text-blue-900">Job & Internship Portal</h1>
+      <div class="glass card-shadow p-6 mb-8 rounded-lg">
+        <h3 class="text-2xl font-semibold mb-5 text-blue-700">Post a Job/Internship</h3>
+        <form id="postJobForm" class="space-y-3" onsubmit="postJob(event)">
+          <input type="text" id="jobTitle" placeholder="Job Title" required
+               class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:outline-none" />
+          <input type="text" id="jobCompany" placeholder="Company" required
+               class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:outline-none" />
+          <input type="text" id="jobLocation" placeholder="Location" required
+               class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:outline-none" />
+          <button type="submit"
+         class="btn-primary px-6 py-2 mt-4 rounded-lg font-semibold text-white 
+         bg-blue-600 hover:bg-blue-700 
+         shadow-md hover:shadow-lg 
+         transition-all duration-300 ease-out 
+         focus:outline-none focus:ring-4 focus:ring-blue-300">
+  Post Job
+</button>
+
+        </form>
+      </div>
+      <div class="space-y-6">
+        <article class="glass card-shadow p-6 rounded-lg">
+          <h3 class="text-2xl font-semibold text-blue-700">UI/UX Designer Service</h3>
+          <p><strong>Company:</strong> Google</p>
+          <p><strong>Location:</strong> Bangalore (Bengaluru, Karnataka)</p>
+          <button onclick="openModal('apply', 'UI/UX Designer Service')"
+         class="btn-primary mt-4 px-6 py-2 rounded-lg font-semibold text-white 
+         bg-blue-600 hover:bg-blue-700 
+         shadow-md hover:shadow-lg 
+         transition-all duration-300 ease-out 
+         focus:outline-none focus:ring-4 focus:ring-blue-300">
+  Apply
+</button>
+
+        </article>
+      </div>
+    </section>
+
+    <!-- Mentorship Page -->
+    <section id="mentorship" class="page hidden px-2 py-4">
+      <h1 class="text-4xl font-extrabold mb-6 text-blue-900">Mentorship Program</h1>
+      <div class="responsive-grid gap-8">
+        <article class="glass card-shadow p-6 rounded-lg">
+          <h3 class="text-2xl font-semibold mb-4 text-blue-700">Request Mentorship</h3>
+          <form id="requestMentorshipForm" class="space-y-4" onsubmit="requestMentorship(event)">
+            <input type="text" id="mentorshipTopic" placeholder="Topic" required
+              class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:outline-none" />
+            <input type="text" id="mentorshipTime" placeholder="Preferred Time" required
+              class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:outline-none" />
+            <button type="submit" class="btn-primary mt-4 px-6 py-2 rounded-lg font-semibold text-white 
+         bg-blue-600 hover:bg-blue-700 
+         shadow-md hover:shadow-lg 
+         transition-all duration-300 ease-out 
+         focus:outline-none focus:ring-4 focus:ring-blue-300">Submit Request</button>
+          </form>
+        </article>
+
+        <article class="glass card-shadow p-6 rounded-lg">
+          <h3 class="text-2xl font-semibold mb-4 text-blue-700">Mentorship Requests</h3>
+          <div class="bg-gray-100 p-4 rounded mb-6">
+            <p><strong>Lavish:</strong> Career Advice</p>
+            <button class="btn-primary mt-4 px-6 py-2 rounded-lg font-semibold text-white 
+         bg-blue-600 hover:bg-blue-700 
+         shadow-md hover:shadow-lg 
+         transition-all duration-300 ease-out 
+         focus:outline-none focus:ring-4 focus:ring-blue-300" onclick="acceptMentorship()">Accept</button>
+          </div>
+          <h4 class="text-xl font-semibold mb-3 text-blue-900">
+  Chat Demo
+</h4>
+
+          <div class="bg-white p-4 rounded max-h-40 overflow-y-auto border border-gray-300">
+            <p><strong>You:</strong> Hi, mentor!</p>
+            <p><strong>Mentor:</strong> Hello! How can I help?</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Admin Dashboard -->
+    <section id="admin" class="page hidden px-2 py-4">
+      <h1 class="text-4xl font-extrabold mb-6 text-blue-900">Admin Dashboard</h1>
+      <div class="responsive-grid gap-6 mb-8 justify-center">
+        <div class="glass card-shadow p-6 text-center rounded-lg">
+          <h3 class="text-5xl font-extrabold text-blue-700">150</h3>
+          <p class="text-lg text-gray-700">Total Alumni Registered</p>
+        </div>
+        <div class="glass card-shadow p-6 text-center rounded-lg">
+          <h3 class="text-5xl font-extrabold text-blue-700">120</h3>
+          <p class="text-lg text-gray-700">Active Alumni</p>
+        </div>
+        <div class="glass card-shadow p-6 text-center rounded-lg">
+          <h3 class="text-5xl font-extrabold text-blue-700">25</h3>
+          <p class="text-lg text-gray-700">Jobs Posted</p>
+        </div>
+        <div class="glass card-shadow p-6 text-center rounded-lg">
+          <h3 class="text-5xl font-extrabold text-blue-700">10</h3>
+          <p class="text-lg text-gray-700">Events Held</p>
+        </div>
+      </div>
+      <div class="glass card-shadow p-6 rounded-lg">
+        <h3 class="text-2xl font-semibold mb-5 text-blue-700">Analytics Charts</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <p class="font-semibold mb-3">Monthly Registrations</p>
+            <div class="bg-gray-200 rounded h-24 flex items-center justify-center text-gray-400 italic select-none">Bar Chart Placeholder</div>
+          </div>
+          <div>
+            <p class="font-semibold mb-3">Event Participation</p>
+            <div class="bg-gray-200 rounded-full h-24 flex items-center justify-center text-gray-400 italic select-none">Pie Chart Placeholder</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal hidden fixed inset-0 flex items-center justify-center p-4 z-50">
+    <div class="modal-content glass max-w-md w-full p-6 rounded-xl shadow-xl relative">
+      <button aria-label="Close modal" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900" onclick="closeModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+      <h3 id="modal-title" class="text-2xl font-semibold mb-6 text-blue-800">Register for Event</h3>
+      <form id="modalForm" onsubmit="submitModal(event)" class="space-y-4">
+        <input type="text" id="modal-name" placeholder="Name" required
+          class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600" />
+        <input type="email" id="modal-email" placeholder="Email" required
+          class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600" />
+        <button type="submit" class="w-full py-3 mt-3 rounded-lg bg-blue-400 hover:bg-blue-500 transition">Submit</button>
+      </form>
+      <button class="w-full py-3 mt-3 rounded-lg bg-blue-300 hover:bg-blue-400 transition" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+<script src="script.js"></script>
+</body>
+</html>
